@@ -34,4 +34,4 @@ sudo chown -R sonaradmin:sonaradmin /opt/sonarqube
 sudo -u sonaradmin /opt/sonarqube/sonarqube-9.9.4.87374/bin/linux-x86-64/sonar.sh start
 
 # Open port 9000 for SonarQube
-sudo ufw allow 9000/tcp
+# IP:9000
