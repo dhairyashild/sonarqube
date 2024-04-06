@@ -1,0 +1,39 @@
+#!/bin/bash
+sudo apt-get update -y
+
+# Create the SonarQube directory if it doesn't exist
+sudo mkdir -p /opt/sonarqube
+
+# Update package lists
+sudo apt-get update -y
+
+# Install Java
+sudo apt-get install openjdk-17-jdk -y
+
+# Download SonarQube zip file
+cd /opt/sonarqube
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.4.87374.zip
+
+# Install unzip utility
+sudo apt-get install unzip -y
+
+# Unzip SonarQube zip file
+unzip sonarqube-9.9.4.87374.zip
+# Remove the zip file after extraction
+rm sonarqube-9.9.4.87374.zip
+
+User
+# Create the sonaradmin user
+sudo useradd -s /bin/bash sonaradmin
+sudo adduser sonaradmin sonaradmin
+
+
+# Change ownership of the SonarQube directory and its contents to sonaradmin user
+sudo chown -R sonaradmin:sonaradmin /opt/sonarqube
+
+
+# Start SonarQube
+sudo -u sonaradmin /opt/sonarqube/sonarqube-9.9.4.87374/bin/linux-x86-64/sonar.sh start
+
+# Open port 9000 for SonarQube
+sudo ufw allow 9000/tcp
